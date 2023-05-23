@@ -1,7 +1,6 @@
-<p>{{img}}</p>
-<h3>{{counter}}</h3>
 <img [src]="img" *ngIf="img; else elseImg" (error)="onErrorImg()" (load)="imgLoaded(img)">
 <ng-template #elseImg>
   <p>No hay imagen que mostrar</p>
 </ng-template>
 <p *ngIf="img">{{parrafoDefault}}</p>
+
