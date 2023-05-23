@@ -1,34 +1,31 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, AfterViewInit, OnDestroy} from '@angular/core';
-import { Product } from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-img',
   templateUrl: './img.component.html',
   styleUrls: ['./img.component.scss']
 })
-export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class ImgComponent {
 
-  @Input() img:string = '';
-  parrafoDefault:string = '';
+  @Input() img = '';
+  parrafoDefault = '';
   @Output() loaded = new EventEmitter<string>();
   counter = 0;
   counterFn: number | undefined;
-
-
 
   constructor(){
     //before render - run once
     //console.log('constructor', 'imgValue =>', this.img);
   }
 
-  ngOnInit(): void {
+ /* ngOnInit(): void {
     //before render - run once
     //async
-    /*console.log('ngOnInit', 'imgValue =>', this.img);
+    console.log('ngOnInit', 'imgValue =>', this.img);
     this.counterFn = window.setInterval(()=>{
       this.counter +=1;
       console.log("contador" + this.counter);
-    }, 1000);*/
+    }, 1000);
   }
   ngOnChanges(changes: SimpleChanges): void {
     //run while there is any update
@@ -42,7 +39,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
     //console.log('ngOnDestroy');
     //delete component
     window.clearInterval(this.counterFn);
-  }
+  }*/
 
   onErrorImg(){
     this.parrafoDefault = 'No existe la imagen que ingresaste';

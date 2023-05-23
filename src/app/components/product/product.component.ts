@@ -14,7 +14,7 @@ export class ProductComponent {
 
 
     onLoaded(img:string){
-      //console.log('esta llegando al padre', img);
+      console.log('esta llegando al padre', img);
     }
 
     emitProduct(product: Product){

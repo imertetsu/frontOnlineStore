@@ -10,6 +10,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { ProductComponent } from './components/product/product.component';
 import { NavComponent } from './components/nav/nav.component';
 import { VocalToNumberPipe } from './pipes/vocal-to-number.pipe';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { VocalToNumberPipe } from './pipes/vocal-to-number.pipe';
     ProductsComponent,
     ProductComponent,
     NavComponent,
-    VocalToNumberPipe
+    VocalToNumberPipe,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
