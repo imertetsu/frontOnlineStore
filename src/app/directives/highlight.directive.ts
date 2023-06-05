@@ -5,6 +5,9 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
   selector: '[appHighlight]'
 })
 export class HighlightDirective {
+  constructor(private elementRef: ElementRef) {
+
+  }
 
   @HostListener('mouseover') onMouseEnter(){
     this.elementRef.nativeElement.style.border = '1px solid red';
@@ -14,8 +17,6 @@ export class HighlightDirective {
     this.elementRef.nativeElement.style.border = 'none';
   }
 
-  constructor(private elementRef: ElementRef) {
 
-  }
 
 }

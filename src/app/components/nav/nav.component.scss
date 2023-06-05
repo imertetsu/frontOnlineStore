@@ -27,6 +27,7 @@
   transform: translateX(-100%);
 
   transition: all ease-out 0.5s;
+  //si esta activo muestra el menu
   &.active{
     transform: translateX(0%);
   }

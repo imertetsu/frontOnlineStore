@@ -8,7 +8,6 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 export class ImgComponent {
 
   @Input() img = '';
-  parrafoDefault = '';
   @Output() loaded = new EventEmitter<string>();
   counter = 0;
   counterFn: number | undefined;
@@ -18,7 +17,18 @@ export class ImgComponent {
     //console.log('constructor', 'imgValue =>', this.img);
   }
 
- /* ngOnInit(): void {
+  onErrorImg(){
+    this.img = '../../../assets/images/default-img.png';
+    //console.log(this.parrafoDefault);
+  }
+
+  imgLoaded(img:string){
+    //console.log('imagen loaded');
+    this.loaded.emit(img);
+  }
+}
+
+  /* ngOnInit(): void {
     //before render - run once
     //async
     console.log('ngOnInit', 'imgValue =>', this.img);
@@ -40,19 +50,3 @@ export class ImgComponent {
     //delete component
     window.clearInterval(this.counterFn);
   }*/
-
-  onErrorImg(){
-    this.parrafoDefault = 'No existe la imagen que ingresaste';
-    //console.log(this.parrafoDefault);
-  }
-
-  imgLoaded(img:string){
-    //console.log('imagen loaded');
-    this.parrafoDefault = 'Imagen cargada existosamente';
-
-    this.loaded.emit(this.parrafoDefault);
-    this.loaded.emit(img);
-
-  }
-
-}

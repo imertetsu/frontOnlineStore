@@ -9,16 +9,17 @@
     <a href="">
       <img src="./assets/svg/icon_shopping_cart.svg" alt="logo">
     </a>
-    </div>
-    <div class="show-menu" id="side-menu" [class.active]="showMenu">
-      <button (click)="closeMenu()" >Close</button>
-      <ul>
-        <li><a href="">All</a></li>
-        <li><a href="">Clothes</a></li>
-        <li><a href="">Electronics</a></li>
-      </ul>
-    </div>
   </div>
+  <!-- la clase activa se activara cuando showMenu sea true -->
+  <div class="show-menu" id="side-menu" [class.active]="showMenu">
+    <button (click)="closeMenu()" >Close</button>
+    <ul>
+      <li><a href="">All</a></li>
+      <li><a href="">Clothes</a></li>
+      <li><a href="">Electronics</a></li>
+    </ul>
+  </div>
+</div>
   <div class="hide-mobile">
     <div>
       <nav>

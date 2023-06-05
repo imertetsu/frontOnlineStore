@@ -1,6 +1,5 @@
-<img [src]="img" *ngIf="img; else elseImg" (error)="onErrorImg()" (load)="imgLoaded(img)">
+<img [src]="img" *ngIf="img; else elseImg" (error)="onErrorImg()" (load)="imgLoaded(img)" style="max-height: 20rem; width: 90%;" >
 <ng-template #elseImg>
   <p>No hay imagen que mostrar</p>
 </ng-template>
-<p *ngIf="img">{{parrafoDefault}}</p>
 

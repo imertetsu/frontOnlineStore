@@ -1,0 +1,29 @@
+.product-detail {
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: 0;
+  background-color: white;
+  flex-direction: column;
+  transform: translateX(100%);
+
+  transition: all ease-out 0.5s;
+  //si esta activo muestra el menu
+  &.active{
+    transform: translateX(0%);
+  }
+}
+.product-info{
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.btn-section{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+#btn-close{
+  display: block;
+}

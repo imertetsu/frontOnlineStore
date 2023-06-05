@@ -3,9 +3,18 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import 'swiper/css/bundle';
+
 @import url('./app/styles/reset.scss');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 
 *{
   font-family: 'Quicksand', sans-serif;
+}
+
+app-img{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

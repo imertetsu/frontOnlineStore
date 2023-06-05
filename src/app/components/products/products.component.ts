@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
-import {Product} from '../../models/product.model';
+import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model';
 import { StoreService } from 'src/app/services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -12,34 +12,9 @@ export class ProductsComponent implements OnInit{
 
   totalPrice = 0;
   myProductsInCart: Product[] = [];
-
   products: Product[] = [];
-  /*products: Product[] = [
-    {
-      id: '1',
-      name: 'EL mejor juguete',
-      price: 565,
-      image: './assets/images/toy.jpg'
-    },
-    {
-      id: '2',
-      name: 'Bicicleta casi nueva',
-      price: 356,
-      image: './assets/images/bike.jpg'
-    },
-    {
-      id: '3',
-      name: 'Colleción de albumnes',
-      price: 34,
-      image: './assets/images/album.jpg'
-    },
-    {
-      id: '4',
-      name: 'Mis libros',
-      price: 23,
-      image: './assets/images/books.jpg'
-    },
-  ];*/
+  productChosen!: Product;
+  showProduct = false;
 
   constructor(private storeService: StoreService, private productsService:ProductsService){
     this.myProductsInCart = this.storeService.getProductsInCart();
@@ -51,12 +26,10 @@ export class ProductsComponent implements OnInit{
         // Manejar los datos obtenidos
         console.log("Mi lista de productos es: ", data);
         this.products = data;
-      },
-      (error) => {
+      },(error) => {
         // Manejar cualquier error ocurrido durante la solicitud
         console.error(error);
-      }
-    )
+      });
   }
   /*Este metodo escucha lo que viene a ser el producto al presionar el boton "Add Cart"*/
   onListenProduct(product:Product){
@@ -65,14 +38,67 @@ export class ProductsComponent implements OnInit{
     console.log("precio total a pagar: $"+this.totalPrice);
     console.log("Los productos seleccionados son: ", this.myProductsInCart);
     //console.log("instancia storeService "+ JSON.stringify(this.storeService));
-
   }
-
-
   onAddtoShoppingCart(product:Product){
     this.storeService.addProductToCart(product);
     this.totalPrice = this.storeService.sumTotalPrice(product.price);
   }
+  addtoShoppingCart(){
+    this.storeService.addProductToCart(this.productChosen);
+    this.totalPrice = this.storeService.sumTotalPrice(this.productChosen.price);
+  }
 
+  onLoaded(img:string){
+    console.log('esta llegando al componente products', img);
+  }
 
+  displayShowProduct(){
+    this.showProduct = !this.showProduct;
+  }
+
+  onListeningProductId(productId: number){
+    this.productsService.getProduct(productId).subscribe((data)=>{
+      console.log(data);
+      this.displayShowProduct();
+      this.productChosen = data;
+    },(error) => {
+      console.error(error);
+    });
+  }
+
+  createNewProduct() {
+    const product: CreateProductDTO = {
+      name: 'Nuevo prodcuto',
+      description: 'bla bla bla',
+      images: [`https://placeimg.com/640/480/any?random=${Math.random()}`],
+      price: 456,
+      categoryId: 2,
+    }
+    this.productsService.createProduct(product)
+    .subscribe(data => {
+      this.products.unshift(data);
+    });
+  }
+  updateProduct() {
+    const changes: UpdateProductDTO = {
+      name: 'change title',
+    }
+    const id = this.productChosen.id;
+    this.productsService.updateProduct(id, changes)
+    .subscribe(data => {
+      const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
+      this.products[productIndex] = data;
+      this.productChosen = data;
+    });
+  }
+  deleteProduct(){
+    const id = this.productChosen.id;
+    this.productsService.deleteProduct(id).subscribe(() => {
+      const productIndex = this.products.findIndex(product => product.id === this.productChosen.id);
+      this.products = this.products.splice(productIndex, 1);
+      this.displayShowProduct();
+    }, error =>{
+      console.log(error);
+    });
+  }
 }
