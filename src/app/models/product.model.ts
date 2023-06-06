@@ -5,6 +5,7 @@ export interface Product{
   images: string[];
   description: string;
   categoryId: number;
+  taxes?: number;
 }
 
 export interface CreateProductDTO extends Omit<Product, 'id' | 'name'>{
