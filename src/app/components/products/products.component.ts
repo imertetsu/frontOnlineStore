@@ -3,7 +3,7 @@ import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/produc
 import { StoreService } from 'src/app/services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
 
-import { switchMap } from 'rxjs';
+import { switchMap, zip } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -123,6 +123,17 @@ export class ProductsComponent implements OnInit{
     )
     .subscribe(data =>{
       console.log(data);
+    });
+
+    //en caso de no existir dependencia pero se necesita ejecutar mas de una operdacion asincrona utilizamos ZIP
+    //Es como el promise ALL pero en rxjs
+    zip(
+      this.productsService.getProduct(id),
+      this.productsService.updateProduct(id, {name: 'changed'})
+    )
+    .subscribe(response => {
+      const product = response[0];
+      const updated = response[1];
     });
   }
 }

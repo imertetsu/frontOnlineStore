@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { AuthService } from './services/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +10,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   imgURL = 'https://www.w3schools.com/howto/img_avatar.png';
   showImg = true;
+  constructor(
+    private authService: AuthService
+  ){}
 
 
   /*onLoaded(img:string){
@@ -15,5 +20,12 @@ export class AppComponent {
   }*/
   toggleImg(){
     this.showImg = !this.showImg;
+  }
+
+  login(){
+    this.authService.login('201508415@est.umss.edu', '654321')
+      .subscribe(data => {
+        console.log(data);
+      })
   }
 }

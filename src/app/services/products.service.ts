@@ -5,12 +5,14 @@ import { CreateProductDTO, Product } from '../models/product.model';
 import { retry, catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private apiUrl = 'http://localhost:3000/api/v1/products';
+  private apiUrl = `${environment.API_URL}/products`;
 
   constructor(private httpClient:HttpClient) { }
 
