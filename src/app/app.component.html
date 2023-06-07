@@ -1,4 +1,9 @@
 <app-nav></app-nav>
+<button (click)="downloadPDF()"> Download</button>
+<div>
+  <input type="file" (change)="onLoad($event)">
+</div>
+<img *ngIf="imgFile" [src]="imgFile" alt="">
 <!-- <button (click)="toggleImg()"
   class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400">Toggle button
 </button>
