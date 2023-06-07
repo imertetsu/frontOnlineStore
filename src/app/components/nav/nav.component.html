@@ -33,7 +33,13 @@
         </ul>
       </nav>
       <div class="info">
-        <div class="account">imert@gmail.com</div>
+        <button *ngIf="!token; else elseBlock"
+        class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400"
+        (click)="login()"
+        > LOGIN </button>
+        <ng-template #elseBlock>
+          <div class="account">{{email}}</div>
+        </ng-template>
         <div class="cart">
           <a href="">
             <img src="./assets/svg/icon_shopping_cart.svg" alt="logo">
