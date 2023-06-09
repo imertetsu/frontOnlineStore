@@ -10,23 +10,19 @@ import { switchMap, zip } from 'rxjs';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit{
+export class ProductsComponent {
 
   totalPrice = 0;
   myProductsInCart: Product[] = [];
-  products: Product[] = [];
+  @Input() products: Product[] = [];
   productChosen!: Product;
   showProduct = false;
-  limit = 4;
-  offset = 0;
 
   constructor(private storeService: StoreService, private productsService:ProductsService){
     this.myProductsInCart = this.storeService.getProductsInCart();
   }
 
-  ngOnInit(): void {
-    this.loadMore();
-  }
+
   /*Este metodo escucha lo que viene a ser el producto al presionar el boton "Add Cart"*/
   onListenProduct(product:Product){
     console.log("El producto es: ",product);
@@ -96,23 +92,6 @@ export class ProductsComponent implements OnInit{
     }, error =>{
       console.log(error);
     });
-  }
-  //este metodo es para el limit y offset
-  loadMore(){
-    this.productsService.getAllProducts(this.limit, this.offset).subscribe(data => {
-      //concat no es mutable, es inmutable por lo que se debe asignar al array
-      this.products = this.products.concat(data);
-      this.offset += this.limit;
-    });
-  }
-  goBack(){
-    if(this.offset > 0){
-      this.products.length = this.products.length - this.limit;
-      this.offset = this.offset - this.limit;
-    }else{
-      this.products = this.products.splice(0, this.products.length);
-      this.offset = 0;
-    }
   }
 
   //Example como usar switchMap es como que necesitas el id del producto para actualizar, dependencias
