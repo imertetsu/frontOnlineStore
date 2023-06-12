@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
-import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model';
+import { Product, CreateProductDTO, UpdateProductDTO } from '../../../models/product.model';
 import { StoreService } from 'src/app/services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
 
