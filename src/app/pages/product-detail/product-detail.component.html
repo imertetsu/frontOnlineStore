@@ -1,0 +1,45 @@
+<p>product-detail works!</p>
+<div class="page-product" *ngIf="productChosen">
+  <div
+    class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
+    class="detail">
+    <div class="gallery">
+      <button
+          id="btn-close"
+          class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400"
+          style="margin-top: 0.2rem;"
+          (click)="goToBack()"
+          >Back
+        </button>
+      <swiper
+      [slidesPerView]="1"
+    >
+      <ng-template swiperSlide *ngFor="let img of productChosen.images">
+          <img
+            [src]="img"
+            class="h-full w-full object-cover object-center group-hover:opacity-75" >
+        </ng-template>
+      </swiper>
+    </div>
+    <div class="product-info">
+      <h1 class="mt-4 text-sm text-gray-700">{{productChosen.name}}</h1>
+      <h2 class="mt-1 text-lg font-medium text-gray-900">{{productChosen.price | currency: 'Bs'}}</h2>
+      <h2 appHighlight class="mt-1 text-lg font-medium text-gray-900">{{productChosen.description}}</h2>
+      <div class="btn-section">
+        <button
+          id="btn-addCart"
+          (click)="addtoShoppingCart()"
+          class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-400"
+          >Add to Cart
+        </button>
+        <button
+          id="btn-close"
+          class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400"
+          style="margin-top: 0.2rem;"
+          >Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from 'src/app/services/store.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
+import { CategoriesService } from 'src/app/services/categories.service';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-nav',
@@ -14,10 +16,12 @@ export class NavComponent implements OnInit{
   counter = 0;
   email = '';
   profile!: User;
+  categories: Category[] = [];
 
   constructor(
     private storeService: StoreService,
-    private authService: AuthService){
+    private authService: AuthService,
+    private categoriesService: CategoriesService){
 
   }
   ngOnInit(): void {
@@ -42,5 +46,12 @@ export class NavComponent implements OnInit{
         console.log(data);
         this.profile = data;
       });
+  }
+
+  getCategories(){
+    this.categoriesService.getAllCategories()
+    .subscribe(data => {
+      this.categories = data;
+    });
   }
 }

@@ -17,6 +17,14 @@ export class ProductsComponent {
   @Input() products: Product[] = [];
   productChosen!: Product;
   showProduct = false;
+  productId!: number;
+  @Input()
+  //para vigilar continuamente el cambio de este input
+  set idProduct(id: number){
+    if(id){
+      this.onListeningProductId(id);
+    }
+  }
 
   constructor(private storeService: StoreService, private productsService:ProductsService){
     this.myProductsInCart = this.storeService.getProductsInCart();
@@ -46,12 +54,14 @@ export class ProductsComponent {
 
   displayShowProduct(){
     this.showProduct = !this.showProduct;
+    console.log(this.showProduct);
   }
 
   onListeningProductId(productId: number){
+    this.displayShowProduct();
+    this.productId = productId;
     this.productsService.getProduct(productId).subscribe((data)=>{
       console.log(data);
-      this.displayShowProduct();
       this.productChosen = data;
     },(error) => {
       console.error(error);

@@ -1,6 +1,7 @@
 import { Component,OnInit  } from '@angular/core';
 import { ProductsService } from 'src/app/services/products.service';
 
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product.model';
 
 @Component({
@@ -13,15 +14,21 @@ export class HomeComponent implements OnInit{
   limit = 4;
   offset = 0;
   products: Product[] = [];
+  productId!: number;
 
   constructor(
-    private productsService:ProductsService
+    private productsService:ProductsService,
+    private route: ActivatedRoute
   ){
 
   }
 
   ngOnInit(): void {
     this.loadMore();
+    this.route.queryParamMap.subscribe(params =>{
+      this.productId = Number(params.get('product'));
+      console.log(this.productId);
+    });
   }
   //este metodo es para el limit y offset
   loadMore(){

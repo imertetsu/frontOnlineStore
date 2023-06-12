@@ -1,1 +1,14 @@
-<p>category works!</p>
+<div *ngIf="category">
+  <h1>{{category.name}}</h1>
+  <button
+    id="btn-close"
+    class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400"
+    style="margin-top: 0.2rem;"
+    (click)="goToBack()"
+  >Back
+  </button>
+  <app-products
+  [idProduct]="productId"
+  [products]="categoryProducts"></app-products>
+</div>
+

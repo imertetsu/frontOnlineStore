@@ -1,4 +1,7 @@
-<app-products [products]="products"></app-products>
+<app-products
+  [products]="products"
+  [idProduct]="productId">
+</app-products>
 
 <button (click)="goBack()">previous</button>
 <button (click)="loadMore()">Load more</button>
