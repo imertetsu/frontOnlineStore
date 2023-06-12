@@ -1,8 +1,10 @@
 import { Component, NgModule } from '@angular/core';
 
+import { CustomPreloadService } from './services/custom-preload.service';
+import { QuicklinkStrategy } from 'ngx-quicklink';
+
 import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { CustomPreloadService } from './services/custom-preload.service';
 
 const routes: Routes = [
   /*{
@@ -32,7 +34,9 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     //con esto hace la pre carga de todos lo modulos existentes en nuestra app
     //preloadingStrategy: PreloadAllModules
-    preloadingStrategy: CustomPreloadService
+    //es nuestro servicio customizado
+    //preloadingStrategy: CustomPreloadService
+    preloadingStrategy: QuicklinkStrategy //ya esta la estrategia, pero debes importar en cada modulo ejm en el webstie Module
   })],
   exports: [RouterModule]
 })
