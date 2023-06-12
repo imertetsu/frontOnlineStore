@@ -1,16 +1,8 @@
 import { Component, NgModule } from '@angular/core';
-import { LayoutComponent } from './website/components/layout/layout.component';
-import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './website/pages/home/home.component';
-import { NotFoundComponent } from './website/pages/not-found/not-found.component';
-import { CategoriesComponent } from './website/pages/categories/categories.component';
-import { CategoryComponent } from './website/pages/category/category.component';
-import { MyCartComponent } from './website/pages/my-cart/my-cart.component';
-import { LoginComponent } from './website/pages/login/login.component';
-import { RegisterComponent } from './website/pages/register/register.component';
-import { RecoveryComponent } from './website/pages/recovery/recovery.component';
-import { ProfileComponent } from './website/pages/profile/profile.component';
-import { ProductDetailComponent } from './website/pages/product-detail/product-detail.component';
+
+import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { CustomPreloadService } from './services/custom-preload.service';
 
 const routes: Routes = [
   /*{
@@ -20,54 +12,15 @@ const routes: Routes = [
   },*/
   {
     path: '',
-    component: LayoutComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: '/home',
-        pathMatch: 'full'
-      },
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
-        path: 'categories/category/:id',
-        component: CategoryComponent
-      },
-      {
-        path: 'home/product/:id',
-        component: ProductDetailComponent
-      },
-      {
-        path: 'categories',
-        component: CategoriesComponent
-      },
-      {
-        path: 'myCart',
-        component: MyCartComponent
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      },
-      {
-        path: 'register',
-        component: RegisterComponent
-      },
-      {
-        path: 'recovery',
-        component: RecoveryComponent
-      },
-      {
-        path: 'profile',
-        component: ProfileComponent
-      },
-    ]
+    loadChildren: () => import('./website/website.module').then(m => m.WebsiteModule)
   },
   {
     path: 'cms',
-    loadChildren: () => import('./cms/cms.module').then(m => m.CmsModule)
+    loadChildren: () => import('./cms/cms.module').then(m => m.CmsModule),
+    //con esto activamos el preload customizado
+    data: {
+      preload: true
+    }
   },
   {
     path: '**',
@@ -76,7 +29,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    //con esto hace la pre carga de todos lo modulos existentes en nuestra app
+    //preloadingStrategy: PreloadAllModules
+    preloadingStrategy: CustomPreloadService
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
