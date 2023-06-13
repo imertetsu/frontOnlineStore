@@ -1,4 +1,5 @@
 import { Component, NgModule } from '@angular/core';
+import { AdminGuard } from './guards/admin.guard';
 
 import { CustomPreloadService } from './services/custom-preload.service';
 import { QuicklinkStrategy } from 'ngx-quicklink';
@@ -18,6 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'cms',
+    canActivate: [ AdminGuard ],
     loadChildren: () => import('./cms/cms.module').then(m => m.CmsModule),
     //con esto activamos el preload customizado
     data: {

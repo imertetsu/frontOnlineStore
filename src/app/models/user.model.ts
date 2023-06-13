@@ -5,7 +5,6 @@ export interface User{
   email: string;
   recoveryToken?: string;
   role: string;
-  createdAt: string;
   customer?: Customer;
 }
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

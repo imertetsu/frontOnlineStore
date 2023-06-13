@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from './services/auth.service';
+import { TokenService } from './services/token.service';
 import { FilesService } from './services/files.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { FilesService } from './services/files.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   imgURL = 'https://www.w3schools.com/howto/img_avatar.png';
   showImg = true;
 
@@ -16,9 +17,17 @@ export class AppComponent {
 
   constructor(
     private authService: AuthService,
-    private fileService: FilesService
+    private fileService: FilesService,
+    private tokenService: TokenService
   ){}
 
+  ngOnInit(): void {
+    const token = this.tokenService.getToken();
+    if(token){
+      this.authService.getProfile()
+        .subscribe()
+    }
+  }
 
   /*onLoaded(img:string){
     //console.log('esta llegando al padre', img);

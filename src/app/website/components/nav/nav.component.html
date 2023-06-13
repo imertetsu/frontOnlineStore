@@ -38,6 +38,7 @@
           </li>
           <li><a routerLinkActive="active" routerLink="login">Register</a></li>
           <li ><a routerLinkActive="active" routerLink="categories">Categories</a></li>
+          <li ><a routerLinkActive="active" routerLink="profile">Profile</a></li>
         </ul>
       </nav>
       <div class="info">
@@ -46,7 +47,11 @@
         (click)="login()"
         > LOGIN </button>
         <ng-template #elseBlock>
-          <div class="account">{{profile.email}}</div>
+          <a routerLink="/profile" class="account">{{profile?.email}}</a>
+          <button
+          class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400"
+          (click)="logoutUser()"
+          > LOGOUT </button>
         </ng-template>
         <div class="cart">
           <a href="">
