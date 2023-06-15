@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
+import { ExitGuard } from '../guards/exit.guard';
 
 import { HomeComponent } from './pages/home/home.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
@@ -50,6 +51,7 @@ const routes: Routes = [
       },
       {
         path: 'register',
+        canDeactivate: [ ExitGuard ],
         component: RegisterComponent
       },
       {

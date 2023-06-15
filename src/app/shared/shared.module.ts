@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductsComponent } from './components/products/products.component';
 import { ProductComponent } from './components/product/product.component';
@@ -21,6 +22,7 @@ import { SwiperModule } from 'swiper/angular';
     CommonModule,
     SwiperModule,
     RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     VocalToNumberPipe,

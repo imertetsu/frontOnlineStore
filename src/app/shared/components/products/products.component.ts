@@ -4,13 +4,17 @@ import { StoreService } from 'src/app/services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 import { switchMap, zip } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit{
+
+  productFound = new FormControl('');
+  productsF: Product[]= [];
 
   totalPrice = 0;
   myProductsInCart: Product[] = [];
@@ -28,6 +32,10 @@ export class ProductsComponent {
 
   constructor(private storeService: StoreService, private productsService:ProductsService){
     this.myProductsInCart = this.storeService.getProductsInCart();
+  }
+
+  ngOnInit(): void {
+    this.findProductsByName();
   }
 
 
@@ -123,6 +131,20 @@ export class ProductsComponent {
     .subscribe(response => {
       const product = response[0];
       const updated = response[1];
+    });
+  }
+
+  findProductsByName(){
+    this.productFound.valueChanges
+    .subscribe(value => {
+      const regex = new RegExp(`${value}`, 'i');
+      const pf = this.products.filter(product => regex.test(product.name));
+      console.log('filtrados:', pf);
+      if(pf){
+        this.productsF = pf;
+      }else{
+        this.productsF = [];
+      }
     });
   }
 }

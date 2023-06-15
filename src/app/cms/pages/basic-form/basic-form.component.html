@@ -1,0 +1,44 @@
+<p>Name: {{nameField.value}}</p>
+<input type="text" maxlength="20" [formControl]="nameField">
+<!-- <code>
+  <pre>
+    {{nameField | json}}
+  </pre>
+</code> -->
+<button (click)="getNameFieldValue()">get formControl</button>
+
+<p>Email: {{emailField.value}}</p>
+<input type="email" [formControl]="emailField">
+
+<p>PhoneNumber: {{phoneField.value}}</p>
+<input type="tel" [formControl]="phoneField">
+
+<p>Age: {{numberField.value}}</p>
+<input type="number" [formControl]="numberField">
+
+<p>Date: {{dateField.value}}</p>
+<input type="date" [formControl]="dateField">
+
+<p>Color: {{colorField.value}}</p>
+<input type="color" [formControl]="colorField">
+
+<p>Category: {{categoryField.value}}</p>
+<select [formControl]="categoryField" multiple>
+  <option value="category-1">Category 1</option>
+  <option value="category-2">Category 2</option>
+  <option value="category-3">Category 3</option>
+</select>
+
+<p>agreeField: {{agreeField.value}}</p>
+<input type="checkbox" [formControl]="agreeField">
+
+<p>genderField: {{genderField.value}}</p>
+<label for="">
+  <input type="radio" value="male" [formControl]="genderField">
+  Male
+</label>
+<label for="">
+  <input type="radio" value="female" [formControl]="genderField">
+  Female
+</label>
+

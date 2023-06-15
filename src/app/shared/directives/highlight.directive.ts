@@ -16,7 +16,4 @@ export class HighlightDirective {
   @HostListener('mouseout') onMouseLeave(){
     this.elementRef.nativeElement.style.border = 'none';
   }
-
-
-
 }
