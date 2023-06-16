@@ -6,12 +6,22 @@ import { ProductsService } from 'src/app/services/products.service';
 import { switchMap, zip } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
+import SwiperCore, { SwiperOptions, Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit{
+
+  config: SwiperOptions = {
+    slidesPerView: 1,
+    navigation: true,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
+  };
 
   productFound = new FormControl('');
   productsF: Product[]= [];

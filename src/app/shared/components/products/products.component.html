@@ -33,7 +33,10 @@
 <div class="product-detail" [class.active]="showProduct" *ngIf="productChosen">
   <div  class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7" >
     <swiper
-    [slidesPerView]="1"
+    [config]="config"
+    [navigation]="true"
+    [pagination]="{ clickable: true }"
+    [scrollbar]="{ draggable: true }"
   >
     <ng-template swiperSlide *ngFor="let img of productChosen.images">
         <app-img

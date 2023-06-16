@@ -11,7 +11,18 @@
           (click)="goToBack()"
           >Back
         </button>
-      <swiper
+        <swiper
+        [config]="config"
+        [navigation]="true"
+        [pagination]="{ clickable: true }"
+        [scrollbar]="{ draggable: true }"
+
+        (slideChange)="onSlideChange()">
+          <ng-template swiperSlide *ngFor="let img of productChosen.images">
+            <img [src]="img" class="h-full w-full object-cover object-center group-hover:opacity-75">
+          </ng-template>
+        </swiper>
+      <!-- <swiper
       [slidesPerView]="1"
     >
       <ng-template swiperSlide *ngFor="let img of productChosen.images">
@@ -19,7 +30,7 @@
             [src]="img"
             class="h-full w-full object-cover object-center group-hover:opacity-75" >
         </ng-template>
-      </swiper>
+      </swiper> -->
     </div>
     <div class="product-info">
       <h1 class="mt-4 text-sm text-gray-700">{{productChosen.name}}</h1>

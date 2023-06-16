@@ -8,7 +8,7 @@
     align-items: center;
     button {
       border: 0;
-      background: transparent;
+      //background: transparent;
     }
   }
 }
@@ -66,8 +66,12 @@
   .info {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     .account {
       margin-right: .5em;
+    }
+    button{
+      margin-right: calc(1rem - 10px);
     }
     .cart {
       position: relative;

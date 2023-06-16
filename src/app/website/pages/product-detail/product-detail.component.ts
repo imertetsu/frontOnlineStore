@@ -4,13 +4,23 @@ import { ProductsService } from 'src/app/services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product.model';
 import { StoreService } from 'src/app/services/store.service';
+import SwiperCore, { SwiperOptions, Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss']
 })
 export class ProductDetailComponent implements OnInit {
+
+  config: SwiperOptions = {
+    slidesPerView: 1,
+    navigation: true,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
+  };
+
 
   productId!: number;
   productChosen!: Product;
@@ -31,6 +41,9 @@ export class ProductDetailComponent implements OnInit {
       console.log(this.productId);
       this.getProduct(this.productId);
     });
+  }
+  onSlideChange() {
+    console.log('slide change');
   }
 
   getProduct(id: number){
