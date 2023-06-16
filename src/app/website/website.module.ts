@@ -5,6 +5,7 @@ import { WebsiteRoutingModule } from './website-routing.module';
 import { SwiperModule } from 'swiper/angular';
 import { SharedModule } from '../shared/shared.module';
 import { QuicklinkModule } from 'ngx-quicklink';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -37,7 +38,8 @@ import { LayoutComponent } from './components/layout/layout.component';
     WebsiteRoutingModule,
     SwiperModule,
     SharedModule,
-    QuicklinkModule
+    QuicklinkModule,
+    ReactiveFormsModule
   ]
 })
 export class WebsiteModule { }

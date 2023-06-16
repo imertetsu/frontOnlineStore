@@ -1,0 +1,8 @@
+input{
+  &.is-valid{
+    border: 2px solid greenyellow;
+  }
+  &.is-invalid{
+    border: 2px solid red;
+  }
+}

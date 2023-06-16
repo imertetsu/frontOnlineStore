@@ -1,0 +1,22 @@
+form{
+  padding-bottom: 1rem;
+}
+.error-message {
+  opacity: 0;
+  transition: all .5s ease-in;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  &.active{
+    opacity: 1;
+  }
+  p {
+    margin: 0;
+  }
+
+
+
+
+}

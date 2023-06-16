@@ -48,14 +48,6 @@ export class NavComponent implements OnInit{
     console.log("menu cerrado "+this.showMenu);
   }
 
-  login(){
-    this.authService.loginAndGet('tetsu@gmail.com', '123456')
-      .subscribe(() => {
-        this.router.navigate(['/profile']);
-        console.log(this.profile);
-      });
-  }
-
   getCategories(){
     this.categoriesService.getAllCategories()
     .subscribe(data => {

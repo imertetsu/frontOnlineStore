@@ -44,7 +44,7 @@
       <div class="info">
         <button *ngIf="!profile; else elseBlock"
         class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400"
-        (click)="login()"
+        routerLink="/login"
         > LOGIN </button>
         <ng-template #elseBlock>
           <a routerLink="/profile" class="account">{{profile?.email}}</a>

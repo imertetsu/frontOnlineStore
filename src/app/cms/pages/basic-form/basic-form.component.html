@@ -1,11 +1,22 @@
-<p>Name: {{nameField.value}}</p>
-<input type="text" maxlength="20" [formControl]="nameField">
+<!-- [class.is-valid]="nameField.touched && nameField.valid"
+[class.is-invalid]="nameField.touched && nameField.invalid" -->
+<p>Name: {{nameField.valid}}</p>
+<input
+[ngClass]="{
+  'is-valid': nameField.touched && nameField.valid,
+  'is-invalid': nameField.touched && nameField.invalid
+}"
+type="text" maxlength="20" [formControl]="nameField">
 <!-- <code>
   <pre>
     {{nameField | json}}
   </pre>
 </code> -->
-<button (click)="getNameFieldValue()">get formControl</button>
+<button [disabled]="nameField.invalid" (click)="getNameFieldValue()">get formControl</button>
+<p>
+  <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
+</p>
+
 
 <p>Email: {{emailField.value}}</p>
 <input type="email" [formControl]="emailField">

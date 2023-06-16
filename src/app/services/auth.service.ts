@@ -4,7 +4,7 @@ import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angu
 import { environment } from 'src/environments/environment';
 import { Auth } from '../models/auth.model';
 import { User } from '../models/user.model';
-import { switchMap, tap } from 'rxjs';
+import { switchMap, tap, catchError, throwError } from 'rxjs';
 import { TokenService } from './token.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -54,6 +54,14 @@ export class AuthService {
     return this.login(email, password)
       .pipe(
         switchMap(() => this.getProfile())
+      )
+      .pipe(
+        catchError((error:HttpErrorResponse) => {
+          if(error.status === HttpStatusCode.Unauthorized){
+            return throwError(() => new Error ('Unauthorized, wrong email or password'));
+          }
+          return throwError(() => new Error ('Ups algo salio mal'));
+        })
       );
   }
 
