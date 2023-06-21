@@ -1,55 +1,148 @@
 <!-- [class.is-valid]="nameField.touched && nameField.valid"
 [class.is-invalid]="nameField.touched && nameField.invalid" -->
-<p>Name: {{nameField.valid}}</p>
-<input
-[ngClass]="{
-  'is-valid': nameField.touched && nameField.valid,
-  'is-invalid': nameField.touched && nameField.invalid
-}"
-type="text" maxlength="20" [formControl]="nameField">
-<!-- <code>
-  <pre>
-    {{nameField | json}}
-  </pre>
-</code> -->
-<button [disabled]="nameField.invalid" (click)="getNameFieldValue()">get formControl</button>
-<p>
-  <strong *ngIf="nameField.touched && nameField.hasError('required')">Este campo es requerido</strong>
-</p>
+<form  [formGroup]="formGroup" (ngSubmit)="save($event)">
+  <div *ngIf="nameField">
+    <p > Name:</p>
+    <input
+    [ngClass]="{
+      'is-valid': nameField.touched && nameField.valid,
+      'is-invalid': nameField.touched && nameField.invalid}"
+    type="text" maxlength="20" formControlName="name">
+    <!-- <code>
+      <pre>
+        {{nameField | json}}
+      </pre>
+    </code> -->
+    <button [disabled]="nameField.invalid" (click)="getNameFieldValue()">get formControl</button>
+    <div class="messages" [class.active]="nameField.touched && nameField.invalid">
+      <p>
+        <strong
+        *ngIf="nameField.hasError('required')"
+        >Este campo es requerido</strong>
+      </p>
+      <p>
+        <strong
+        *ngIf="nameField.hasError('maxlength')"
+        >No se permiten mas de 25 Caracteres</strong>
+      </p>
+      <p>
+        <strong
+        *ngIf="nameField.hasError('pattern')"
+        >No cumple con el patron de un nombre</strong>
+      </p>
+    </div>
+  </div>
 
+  <div *ngIf="emailField">
+    <p>Email: {{emailField.value}}</p>
+    <input
+    [ngClass]="{
+      'is-valid': emailField.touched && emailField.valid,
+      'is-invalid': emailField.touched && emailField.invalid}"
+    type="email" formControlName="email">
+    <div class="messages" [class.active]="emailField.touched && emailField.invalid">
+      <p>
+        <strong
+        *ngIf="emailField.hasError('required')"
+        >Este campo es requerido</strong>
+      </p>
+      <p>
+        <strong
+        *ngIf="emailField.hasError('email')"
+        >No es un email valido</strong>
+      </p>
+    </div>
+  </div>
 
-<p>Email: {{emailField.value}}</p>
-<input type="email" [formControl]="emailField">
+  <mat-form-field class="example-full-width" *ngIf="emailField">
+    <mat-label>Email</mat-label>
+    <input type="email" matInput formControlName="email"
+           placeholder="Ex. pat@example.com">
+    <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="emailField.hasError('email')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailField.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-<p>PhoneNumber: {{phoneField.value}}</p>
-<input type="tel" [formControl]="phoneField">
+  <div *ngIf="phoneField">
+    <p>PhoneNumber: {{phoneField.value}}</p>
+    <input
+    [ngClass]="{
+      'is-valid': phoneField.touched && phoneField.valid,
+      'is-invalid': phoneField.touched && phoneField.invalid}"
+    type="tel" formControlName="phone">
+    <div class="messages" [class.active]="phoneField.touched && phoneField.invalid">
+      <p>
+        <strong
+        *ngIf="phoneField.hasError('required')"
+        >Este campo es requerido</strong>
+      </p>
+      <p>
+        <strong
+        *ngIf="phoneField.hasError('minlength')"
+        >requiere al menos 7 digitos</strong>
+      </p>
+      <p>
+        <strong
+        *ngIf="phoneField.hasError('maxlength')"
+        >maximo 8 digitos</strong>
+      </p>
+    </div>
+  </div>
 
-<p>Age: {{numberField.value}}</p>
-<input type="number" [formControl]="numberField">
+<p>Age: {{ numberField?.value}}</p>
+<input type="number" formControlName="number">
 
-<p>Date: {{dateField.value}}</p>
-<input type="date" [formControl]="dateField">
+<p>Date: {{dateField?.value}}</p>
+<input type="date" formControlName="date">
 
-<p>Color: {{colorField.value}}</p>
-<input type="color" [formControl]="colorField">
+<mat-form-field class="mat-primary">
+  <mat-label>Choose a date</mat-label>
+  <input matInput [matDatepicker]="picker">
+  <mat-hint>MM/DD/YYYY</mat-hint>
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
 
-<p>Category: {{categoryField.value}}</p>
-<select [formControl]="categoryField" multiple>
+<p>Color: {{colorField?.value}}</p>
+<input type="color" formControlName="color">
+
+<p>Category: {{categoryField?.value}}</p>
+<select formControlName="category" multiple>
   <option value="category-1">Category 1</option>
   <option value="category-2">Category 2</option>
   <option value="category-3">Category 3</option>
 </select>
 
-<p>agreeField: {{agreeField.value}}</p>
-<input type="checkbox" [formControl]="agreeField">
+<div *ngIf="agreeField">
+  <p>agreeField: {{agreeField.value}}</p>
+  <input type="checkbox" formControlName="agree">
+  <div class="messages" [class.active]="agreeField.invalid">
+    <p>
+      <strong
+      *ngIf="agreeField.hasError('requiredTrue')"
+      >Necesitas aceptar los terminos</strong>
+    </p>
+  </div>
+</div>
 
-<p>genderField: {{genderField.value}}</p>
+
+
+<p>genderField: {{genderField?.value}}</p>
 <label for="">
-  <input type="radio" value="male" [formControl]="genderField">
+  <input type="radio" value="male" formControlName="gender">
   Male
 </label>
 <label for="">
-  <input type="radio" value="female" [formControl]="genderField">
+  <input type="radio" value="female" formControlName="gender">
   Female
 </label>
 
+<button
+class="py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400"
+type="submit" [disabled]="formGroup.invalid">Submit</button>
+
+</form>

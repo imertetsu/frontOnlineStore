@@ -8,6 +8,7 @@
 
 @import url('./app/styles/reset.scss');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 *{
   font-family: 'Quicksand', sans-serif;
@@ -19,3 +20,7 @@ app-img{
   justify-content: center;
   align-items: center;
 }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
