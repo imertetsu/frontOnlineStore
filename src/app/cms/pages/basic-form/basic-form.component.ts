@@ -57,7 +57,7 @@ export class BasicFormComponent implements OnInit {
       category: ['category-2'],
       agree: [false, [Validators.requiredTrue]],
       gender: [''],
-    })
+    });
   }
 
   get nameField() {

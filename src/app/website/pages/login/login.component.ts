@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
 
   errorFlag = '';
+  formGroup!: FormGroup;
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -19,23 +20,25 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ){}
 
+  buildForm(){
+    this.formGroup = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.maxLength(25), Validators.pattern(/^([Aa-zA-ZáéíóúÁÉÍÓÚÑñ]{2,}\s?){2,4}$/)]],
+    });
+  }
 
   submitData(event: Event){
-
     console.log(this.loginForm.value);
     this.authService.loginAndGet(`${this.loginForm.value.email}`, `${this.loginForm.value.password}`)
       .subscribe(() => {
       this.router.navigate(['/profile']);
-
     },(error) => {
       console.log(error);
       this.errorFlag = error;
     });
-
   }
-
-
 }
