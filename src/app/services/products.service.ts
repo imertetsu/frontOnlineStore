@@ -47,6 +47,9 @@ export class ProductsService {
       })
     );
   }
+  getAllProductsSimple(){
+    return this.httpClient.get<Product[]>(this.apiUrl);
+  }
   getProductByPage(limit: number, offset: number){
     return this.httpClient.get<Product[]>(`${this.apiUrl}`, {
       params: { limit, offset }
