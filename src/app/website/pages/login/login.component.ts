@@ -32,7 +32,7 @@ export class LoginComponent {
   }
 
   submitData(event: Event){
-    console.log(this.loginForm.value);
+    console.log(this.loginForm.value, "evento:", event);
     this.authService.loginAndGet(`${this.loginForm.value.email}`, `${this.loginForm.value.password}`)
       .subscribe(() => {
       this.router.navigate(['/profile']);
